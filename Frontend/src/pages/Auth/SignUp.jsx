@@ -25,7 +25,26 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    // Validation will come later
+    let profileImageUrl = "";
+
+    if (!fullName) {
+      setError("Please enter your name");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Please enter the correct password");
+      return;
+    }
+
+    setError("");
+
+    // Sign Up API Call
   };
 
   return (
@@ -72,7 +91,9 @@ const SignUp = () => {
               />
             </div>
           </div>
-          {/* Login Button */}
+          {/* Error Message */}
+          {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
+          {/* SignUp Button */}
           <button type="submit" className="btn-primary">
             SIGN UP
           </button>
