@@ -50,7 +50,48 @@ exports.registerUser = async (req, res) => {
 };
 
 //Login User
-exports.loginUser = async (req, res) => {};
+exports.loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
-//Register user
-exports.getUserInfo = async (req, res) => {};
+  try {
+    const user = await User.findOne({ email });
+    if (!user || !(await user.comparePassword(password))) {
+      return res.status(400).json({ message: "Invalid Credentials" });
+    }
+
+    res.status(200).json({
+      id: user._id,
+      fullname: user.fullname,
+      email: user.email,
+      profileImageUrl: user.profileImageUrl,
+      token: generateToken(user._id),
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Error logging in user",
+      error: err.message,
+    });
+  }
+};
+
+//Get user info
+exports.getUserInfo = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Error fetching user information",
+      error: err.message,
+    });
+  }
+};
