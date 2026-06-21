@@ -6,6 +6,7 @@ const cors = require("cors");
 
 // Database Connection
 const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.use(express.json());
  * Connect MongoDB
  */
 connectDB();
+
+app.use("/api/v1/auth", authRoutes);
 
 /**
  * Start Server
