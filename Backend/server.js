@@ -7,8 +7,12 @@ const cors = require("cors");
 // Database Connection
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const incomeRoutes = require("./routes/incomeRoutes");
+const expenseRoutes = require("./routes/expenseRoutes");
 
 const app = express();
+
+const path = require("path");
 
 /**
  * CORS Middleware
@@ -33,6 +37,11 @@ app.use(express.json());
 connectDB();
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/income", incomeRoutes);
+app.use("/api/v1/expense", expenseRoutes);
+
+//serve uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /**
  * Start Server
