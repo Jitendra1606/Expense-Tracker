@@ -15,25 +15,30 @@ import SignUp from "./pages/Auth/SignUp";
 import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
+import UserProvider from "./context/UserContext";
 
 const App = () => {
   return (
-    // Router enables client-side routing in React
-    <Router>
-      <Routes>
-        {/* Root route checks authentication status */}
-        <Route path="/" element={<Root />} />
+    <UserProvider>
+      {/* Router enables client-side routing in React */}
+      <div>
+        <Router>
+          <Routes>
+            {/* Root route checks authentication status */}
+            <Route path="/" element={<Root />} />
 
-        {/* Public Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+            {/* Public Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
 
-        {/* Protected Routes (currently not protected) */}
-        <Route path="/dashboard" element={<Home />} />
-        <Route path="/income" element={<Income />} />
-        <Route path="/expense" element={<Expense />} />
-      </Routes>
-    </Router>
+            {/* Protected Routes (currently not protected) */}
+            <Route path="/dashboard" element={<Home />} />
+            <Route path="/income" element={<Income />} />
+            <Route path="/expense" element={<Expense />} />
+          </Routes>
+        </Router>
+      </div>
+    </UserProvider>
   );
 };
 
