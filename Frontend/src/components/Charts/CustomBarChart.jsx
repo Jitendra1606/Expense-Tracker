@@ -12,7 +12,7 @@ import {
 
 import CustomTooltip from "./CustomTooltip";
 
-const CustomBarChart = ({ data = [] }) => {
+const CustomBarChart = ({ data = [], xAxisKey = "category" }) => {
   const getBarColor = (index) => {
     return index % 2 === 0 ? "#875CF5" : "#CFBEFB";
   };
@@ -24,7 +24,7 @@ const CustomBarChart = ({ data = [] }) => {
           <CartesianGrid stroke="none" />
 
           <XAxis
-            dataKey="category"
+            dataKey={xAxisKey}
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
