@@ -4,15 +4,7 @@ A modern full-stack **Expense Tracker** built using the **MERN Stack** that help
 
 ---
 
-## 🚀 Live Demo
-
-> Coming Soon
-
----
-
 ## 📸 Screenshots
-
-> Add screenshots here after deployment.
 
 ### Login
 
@@ -323,6 +315,7 @@ GitHub:
 https://github.com/Jitendra1606
 
 LinkedIn:
+https://www.linkedin.com/in/jitendra-sharma-3a9495236/
 
 ---
 
