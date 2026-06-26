@@ -1,49 +1,81 @@
-import React, { useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
-import { LuWalletMinimal } from "react-icons/lu";
+import { UserContext } from "../../context/UserContext";
 import SideMenu from "./SideMenu";
 
 const Navbar = ({ activeMenu }) => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
+  const { user } = useContext(UserContext);
+
+  const greeting = useMemo(() => {
+    const hour = new Date().getHours();
+
+    if (hour < 12) {
+      return {
+        text: "Good Morning",
+        emoji: "☀️",
+      };
+    }
+
+    if (hour < 17) {
+      return {
+        text: "Good Afternoon",
+        emoji: "🌤️",
+      };
+    }
+
+    return {
+      text: "Good Evening",
+      emoji: "🌙",
+    };
+  }, []);
+
   return (
     <>
-      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-gray-200">
-        <div className="h-16 px-6 lg:px-8 flex items-center justify-between">
-          {/* Left Section */}
-          <div className="flex items-center gap-4">
-            <button
-              className="lg:hidden text-gray-700 hover:text-primary transition-colors"
-              onClick={() => setOpenSideMenu(!openSideMenu)}
-            >
-              {openSideMenu ? (
-                <HiOutlineX className="text-2xl" />
-              ) : (
-                <HiOutlineMenu className="text-2xl" />
-              )}
-            </button>
+      <div className="flex items-center justify-between bg-white border-b border-gray-200 px-7 py-4 sticky top-0 z-30 shadow-sm">
+        {/* Left */}
 
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-md">
-                <LuWalletMinimal className="text-xl" />
-              </div>
+        <div className="flex items-center gap-4">
+          <button
+            className="block lg:hidden"
+            onClick={() => setOpenSideMenu(!openSideMenu)}
+          >
+            {openSideMenu ? (
+              <HiOutlineX className="text-2xl" />
+            ) : (
+              <HiOutlineMenu className="text-2xl" />
+            )}
+          </button>
 
-              <div>
-                <h1 className="text-lg font-semibold text-gray-900 tracking-tight">
-                  Expense Tracker
-                </h1>
+          <div>
+            <h2 className="text-2xl font-bold text-primary flex items-center gap-2">
+              Expense Tracker
+            </h2>
 
-                <p className="text-xs text-gray-500">
-                  Manage your finances smarter
-                </p>
-              </div>
-            </div>
+            <p className="text-sm text-gray-500">
+              Manage your finances smarter
+            </p>
           </div>
         </div>
-      </header>
+
+        {/* Right */}
+
+        {user && (
+          <div className="hidden md:block text-right">
+            <p className="text-sm text-gray-500">
+              {greeting.text} {greeting.emoji}
+            </p>
+
+            <h4 className="text-lg font-semibold text-gray-900">
+              {user.fullname}
+            </h4>
+          </div>
+        )}
+      </div>
 
       {openSideMenu && (
-        <div className="fixed top-16 left-0 z-40 bg-white shadow-xl border-r border-gray-200">
+        <div className="fixed top-[76px] left-0 bg-white shadow-xl z-50">
           <SideMenu activeMenu={activeMenu} />
         </div>
       )}

@@ -81,7 +81,7 @@ const TransactionInfoCard = ({
           className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold ${getAmountStyles()}`}
         >
           <span>
-            {type === "income" ? "+" : "-"} ${addThousandsSeparator(amount)}
+            {type === "income" ? "+" : "-"} ₹{addThousandsSeparator(amount)}
           </span>
 
           {type === "income" ? (

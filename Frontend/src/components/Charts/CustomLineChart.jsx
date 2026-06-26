@@ -21,7 +21,7 @@ const CustomLineChart = ({ data = [] }) => {
           <p className="text-sm text-gray-600">
             Amount:{" "}
             <span className="text-sm font-medium text-gray-900">
-              ${payload[0].payload.amount}
+              ₹{payload[0].payload.amount}
             </span>
           </p>
         </div>
