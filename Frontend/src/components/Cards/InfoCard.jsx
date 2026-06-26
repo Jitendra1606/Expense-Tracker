@@ -2,15 +2,46 @@ import React from "react";
 
 const InfoCard = ({ icon, label, value, color }) => {
   return (
-    <div className="flex gap-6 bg-white p-6 rounded-2xl shadow-md shadow-gray-100 border border-gray-200/50">
+    <div
+      className="
+        bg-white
+        rounded-2xl
+        border border-gray-200/60
+        shadow-sm
+        hover:shadow-xl
+        hover:-translate-y-1
+        transition-all
+        duration-300
+        p-6
+        flex
+        items-center
+        gap-5
+        cursor-default
+      "
+    >
       <div
-        className={`w-14 h-14 flex items-center justify-center text-[26px] text-white ${color} rounded-full drop-shadow-xl`}
+        className={`
+          w-16
+          h-16
+          rounded-2xl
+          flex
+          items-center
+          justify-center
+          text-white
+          text-3xl
+          ${color}
+          shadow-lg
+        `}
       >
         {icon}
       </div>
-      <div>
-        <h6 className="text-sm text-gray-500 mb-1">{label}</h6>
-        <span className="text-[22px] font-semibold">${value}</span>
+
+      <div className="flex flex-col">
+        <p className="text-sm font-medium text-gray-500">{label}</p>
+
+        <h2 className="text-4xl font-bold text-gray-900 tracking-tight mt-1">
+          ${value}
+        </h2>
       </div>
     </div>
   );
