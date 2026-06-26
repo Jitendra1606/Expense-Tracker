@@ -16,10 +16,31 @@ const Profile = () => {
 
   const handleProfileUpdate = async (profile) => {
     try {
-      const response = await axiosInstance.put(
-        API_PATHS.AUTH.UPDATE_PROFILE,
-        profile,
-      );
+      let profileImageUrl = user?.profileImageUrl || "";
+
+      // Upload image if a new one is selected
+      if (profile.image) {
+        const formData = new FormData();
+        formData.append("image", profile.image);
+
+        const uploadResponse = await axiosInstance.post(
+          API_PATHS.IMAGE.UPLOAD_IMAGE,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          },
+        );
+
+        profileImageUrl = uploadResponse.data.imageUrl;
+      }
+
+      // Update profile
+      const response = await axiosInstance.put(API_PATHS.AUTH.UPDATE_PROFILE, {
+        fullname: profile.fullname,
+        profileImageUrl,
+      });
 
       updateUser(response.data);
 
