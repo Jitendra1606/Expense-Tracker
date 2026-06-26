@@ -96,11 +96,13 @@ exports.downloadExpenseExcel = async (req, res) => {
     const data = expenses.map((item) => ({
       Category: item.category,
       Amount: item.amount,
-      Date: item.date,
+      Date: moment(item.date).format("DD MMM YYYY"),
     }));
 
     const wb = xlsx.utils.book_new();
     const ws = xlsx.utils.json_to_sheet(data);
+
+    ws["!cols"] = [{ wch: 30 }, { wch: 15 }, { wch: 20 }];
 
     xlsx.utils.book_append_sheet(wb, ws, "Expenses");
 

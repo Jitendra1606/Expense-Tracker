@@ -70,22 +70,28 @@ exports.deleteIncome = async (req, res) => {
 };
 
 //Download Excel
+const moment = require("moment");
+
+// Download Excel
 exports.downloadIncomeExcel = async (req, res) => {
   const userId = req.user.id;
 
   try {
     const income = await Income.find({ userId }).sort({ date: -1 });
 
-    //prepare data for Excel
     const data = income.map((item) => ({
       Source: item.source,
       Amount: item.amount,
-      Date: item.date,
+      Date: moment(item.date).format("DD MMM YYYY"),
     }));
 
     const wb = xlsx.utils.book_new();
     const ws = xlsx.utils.json_to_sheet(data);
+
+    ws["!cols"] = [{ wch: 25 }, { wch: 15 }, { wch: 20 }];
+
     xlsx.utils.book_append_sheet(wb, ws, "Income");
+
     xlsx.writeFile(wb, "Income_details.xlsx");
     res.download("Income_details.xlsx");
   } catch (error) {
