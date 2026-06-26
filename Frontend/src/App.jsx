@@ -1,4 +1,5 @@
 import React from "react";
+import Profile from "./pages/Dashboard/Profile";
 
 import {
   BrowserRouter as Router,
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/dashboard" element={<Home />} />
             <Route path="/income" element={<Income />} />
             <Route path="/expense" element={<Expense />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </Router>
       </div>

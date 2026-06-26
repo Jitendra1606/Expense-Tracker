@@ -19,7 +19,7 @@ const RecentTransactions = ({ transactions = [], onSeeMore }) => {
 
         <button className="card-btn" onClick={onSeeMore}>
           See All
-          <LuArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
+          <LuArrowRight className="text-lg" />
         </button>
       </div>
 

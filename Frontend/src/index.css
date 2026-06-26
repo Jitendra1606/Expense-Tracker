@@ -48,7 +48,7 @@
 }
 
 .card-btn {
-    @apply group flex items-center gap-2 text-[13px] font-medium text-gray-700 hover:text-purple-500 bg-gray-50 hover:bg-purple-50 px-4 py-2 rounded-xl border border-gray-200 transition-all duration-300 cursor-pointer;
+    @apply flex items-center gap-2 text-[13px] font-medium text-gray-700 hover:text-purple-500 bg-gray-50 hover:bg-purple-50 px-4 py-2 rounded-xl border border-gray-200 transition-all duration-300 cursor-pointer;
 }
 
 .add-btn {
